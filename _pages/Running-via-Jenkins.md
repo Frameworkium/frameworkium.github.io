@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Running via Build Tool (eg Jenkins)"
+title:  "Running via Build Tool (e.g. Jenkins)"
 category: wiki
 section: 6 - Advanced Usage
 order: 9
@@ -21,6 +21,6 @@ order: 9
 
 ## Parameters
 
-- Set up build parameters for each (or the ones you'll need) of the [command line variables](http://github.com/robertgates55/frameworkium/wiki/Command-Line-Interface) we can pass in
+- Set up build parameters for each (or the ones you'll need) of the [command line variables](http://frameworkium.github.io/#_pages/Command-Line-Options.md) we can pass in
 - eg a variable called `BROWSER` which has a dropdown list of firefox, chrome, safari, etc
 - Pass these parameters into the relevant section of the maven build job - eg `mvn test -Dbrowser=$BROWSER`

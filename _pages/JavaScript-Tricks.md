@@ -14,7 +14,7 @@ Your tests are supposed to be simulating user actions and user flows, so injecti
 
 **Example**
 
-In order to upload a file to a site, the 'choose files' input control is used. See [Native Controls](https://github.com/robertgates55/frameworkium/wiki/Native-Controls) for how we handle this scenario using the SendKeys directly to input controls.
+In order to upload a file to a site, the 'choose files' input control is used. See [Native Controls](http://frameworkium.github.io/#_pages/Native-Controls.md) for how we handle this scenario using the SendKeys directly to input controls.
 
 
 **Problem**

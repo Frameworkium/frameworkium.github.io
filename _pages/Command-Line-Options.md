@@ -42,9 +42,8 @@ Property | Description | Values
 `device`| The device on which you wish to run remote tests. If not using SauceLabs or BrowserStack,  can be specified with the `-Dbrowser=chrome` parameter to instigate a Chrome browser emulator of the specified device. |`iPhone`, `iPad`, `iPhone Retina 4-inch`, `Galaxy S4`,  etc….
 
 ### Remote Supported Devices/Platforms
-**BrowserStack:** https://www.browserstack.com/list-of-browsers-and-platforms
-
-**SauceLabs:** https://saucelabs.com/platforms
+**BrowserStack:** [https://www.browserstack.com/list-of-browsers-and-platforms](https://www.browserstack.com/list-of-browsers-and-platforms)
+**SauceLabs:** [https://saucelabs.com/platforms](https://saucelabs.com/platforms)
 
 ## Jira/Zephyr/Test Result Logging Integrations:
 

@@ -20,4 +20,4 @@ This will interpret @Step, @Issue, @Features and @Story annotations, and provide
 
 ## Jenkins + Allure Reporting
 
-When run via Jenkins, the [allure-jenkins-plugin](https://github.com/allure-framework/allure-jenkins-plugin) can be added to the jenkins job, and will automatically produce and store reports for every job run.
+When run via Jenkins, the [allure-jenkins-plugin](https://wiki.jenkins.io/display/JENKINS/Allure+Plugin) can be added to the jenkins job, and will automatically produce and store reports for every job run.

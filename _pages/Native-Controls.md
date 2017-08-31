@@ -8,7 +8,7 @@ order: 7
 
 ## Alerts/Dialog boxes
 
-[This test](https://github.com/robertgates55/frameworkium/blob/master/src/test/java/com/frameworkium/tests/web/TheInternetHerokuWebTest.java#L202) demonstrates the use of the `switchTo().alert()` functionality that selenium uses to interact with javascript alert popups. The page object [here](https://github.com/robertgates55/frameworkium/blob/master/src/test/java/com/frameworkium/pages/web/JavaScriptAlertsPage.java) contains the methods that accept, dismiss, cancel, ok, and enter text to a variety of different native JS popups. These are summarised below:
+[This test](https://github.com/Frameworkium/frameworkium-examples/blob/master/src/test/java/com/heroku/theinternet/tests/web/TheInternetExampleTests.java#233) demonstrates the use of the `switchTo().alert()` functionality that selenium uses to interact with javascript alert popups. The page object [here](https://github.com/Frameworkium/frameworkium-examples/blob/master/src/test/java/com/heroku/theinternet/pages/web/JavaScriptAlertsPage.java) contains the methods that accept, dismiss, cancel, ok, and enter text to a variety of different native JS popups. These are summarised below:
 
 ```java
 //To accept an alert (eg click 'yes' or 'accept' or 'ok'
@@ -31,7 +31,7 @@ In order to upload a file to a site, the 'choose files' input control is used. T
 
 In order to get around this, we can SendKeys(/path/to/file) directly on the input control - eg `chooseFilesInputButton.sendKeys("/path/to/file");`, which bypasses the file browser that selenium cannot handle.
 
-The example below demonstrates how to perform this on the [HeroKu File Upload](http://the-internet.herokuapp.com/upload) page. The full example page object can be seen [here](https://github.com/robertgates55/frameworkium/blob/master/src/test/java/com/frameworkium/pages/web/FileUploadPage.java) and the test that uses this [here](https://github.com/robertgates55/frameworkium/blob/master/src/test/java/com/frameworkium/tests/web/TheInternetHerokuWebTest.java#L140)
+The example below demonstrates how to perform this on the [HeroKu File Upload](http://the-internet.herokuapp.com/upload) page. The full example page object can be seen [here](https://github.com/Frameworkium/frameworkium-examples/blob/master/src/test/java/com/heroku/theinternet/pages/web/FileUploadPage.java) and the test that uses this [here](https://github.com/Frameworkium/frameworkium-examples/blob/master/src/test/java/com/heroku/theinternet/tests/web/TheInternetExampleTests.java#L140)
 
 ```java
 @Visible
