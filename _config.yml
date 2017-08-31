@@ -1,0 +1,25 @@
+# Setup
+title:        frameworkium
+tagline:      "A quick-start automation project for web, app, & api testing"
+baseurl:      "/"
+# paginate:     1
+include:      ['_pages']
+logo:         "assets/colours1.png"
+
+# About/contact
+author:
+  name:       Frameworkium Team
+  url:        https://github.com/Frameworkium
+
+# Gems
+gems:
+  - jekyll-paginate
+
+#Others
+markdown: kramdown
+
+highlighter: rouge
+
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge

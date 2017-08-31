@@ -1,0 +1,31 @@
+---
+layout: default
+title: {{ site.name }}
+---
+{% assign wiki_pages = site.pages | where:"category","wiki"  | sort: 'section' %}
+{% assign items_grouped = wiki_pages | group_by: 'section' %}
+
+<div>
+  <h1>Usage Guide:</h1>
+{% for group in items_grouped %}
+  <ul>{{ group.name }}
+  {% assign sorted_pages = group.items | sort: 'order' %}
+  {% for page in sorted_pages  %}
+    <ul><a href="#{{ page.path }}">{{ page.title }}</a></ul>
+  {% endfor %}
+  </ul>
+{% endfor %}
+</div>
+
+<div>
+{% for group in items_grouped %}
+  {% assign sorted_pages = group.items | sort: 'order' %}
+  {% for page in sorted_pages %}
+    {%if page.category == "wiki" %}
+        <hr>
+        <h1 id="{{ page.path }}">{{ page.title }}</h1>
+        {{ page.content }}
+    {%endif%}
+  {% endfor %}
+{% endfor %}
+</div>
