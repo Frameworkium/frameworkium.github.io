@@ -2,7 +2,7 @@
 layout: post
 title:  "Contibuting"
 category: wiki
-section: "10 - Contributing"
+section: "8 - Contributing"
 order: 16
 ---
 To Contirbute:

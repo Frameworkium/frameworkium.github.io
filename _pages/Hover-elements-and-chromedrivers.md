@@ -2,7 +2,7 @@
 layout: post
 title:  "Hovering with ChromeDriver"
 category: wiki
-section: "9 - Other"
+section: "7 - Other"
 order: 15
 ---
 This is a known bug associated with chromedrivers and selenium's interaction with mouseover/hover over elements.

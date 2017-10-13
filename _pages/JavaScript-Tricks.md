@@ -2,7 +2,7 @@
 layout: post
 title:  "JavaScript Hacks"
 category: wiki
-section: "9 - Other"
+section: "7 - Other"
 order: 8
 ---
 
