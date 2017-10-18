@@ -30,6 +30,7 @@ Property | Description | Values
 `firefoxProfile`| Provide a custom firefox profile when opening firefox - eg containing specific authentication settings preset [EDIT - see `customBrowserImpl` below for preferred method] | e.g. `path/to/myCustomFFProfile.profile`
 `chromeUserDataDir`| Set custom chrome user data directory for custom implementations [EDIT - see `customBrowserImpl` below for preferred method] | e.g. `path/to/chrome_user_data_dir`
 `customBrowserImpl`| Used alongside the `-Dbrowser=custom` param. Allows users to specify classname of their own browser implementation, for example for specifying a custom set of DesiredCapabilities | e.g. `ChromeIncognitoBrowserImpl`
+`headless`| Allows users to run Chrome or Firefox in a headless environment | e.g. `headless=true`
 
 ## Remote Grids/Different devices & platforms
 
