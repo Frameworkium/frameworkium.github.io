@@ -45,7 +45,7 @@ Property | Description | Values
 `device`| The device on which you wish to run remote tests. If not using SauceLabs or BrowserStack,  can be specified with the `-Dbrowser=chrome` parameter to instigate a Chrome browser emulator of the specified device. |`iPhone`, `iPad`, `iPhone Retina 4-inch`, `Galaxy S4`,  etc….
 `applicationName`| Specify applicationName parameter for a grid run.| e.g. `windows7_32bits_firefox`
 `videoCaptureUrl`| Enable video capture using Grid plugins. Usage of video capture is generic as possible. All grid plugins, such as Selenium Grid Extras, capture videos by the WebDriver session ID.| e.g. `http://localhost:3000/download_video/%s.mp4`
-`appPath`| The path to the apk file to be used in Sauce Labs.| e.g. `/home/dev/android/build/newapp_1.2.5.apk`
+`appPath`| The path to the apk file to be used in Sauce Labs. It is also used as the `app` desired capability of the supported [WinAppDriver](https://github.com/Microsoft/WinAppDriver) | e.g. `/home/dev/android/build/newapp_1.2.5.apk` for SauceLabs or `Microsoft.WindowsAlarms_8wekyb3d8bbwe!App`, or `C:\Windows\System32\notepad.exe` for the WinAppDriver.
 
 ### Remote Supported Devices/Platforms
 **BrowserStack:** [https://www.browserstack.com/list-of-browsers-and-platforms](https://www.browserstack.com/list-of-browsers-and-platforms)

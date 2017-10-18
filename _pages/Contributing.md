@@ -3,7 +3,7 @@ layout: post
 title:  "Contibuting"
 category: wiki
 section: "8 - Contributing"
-order: 16
+order: 17
 ---
 To Contribute:
 - Implement the feature on a branch
