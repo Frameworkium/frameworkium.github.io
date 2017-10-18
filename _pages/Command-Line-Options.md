@@ -13,17 +13,18 @@ Tests can be executed by running `mvn clean verify` followed by any properties y
 
 Property | Description | Values
 -------- | ----------- | ------
-`groups`| The TestNG test groups which you wish to run. All tests groups will run if not specified. | e.g.`checkintest`
 `test`| The test class,  or list of test classes (separated by commas),  to run. Can include wildcards. | e.g. `TflLoginWebTests, Heroku*`
 `threads`| The number of threads to use. Defaults to 1 if not specified. | e.g. `3`
+`groups`| The TestNG test groups which you wish to run. All tests groups will run if not specified. | e.g.`checkintest`
 `build`| The build version or app version to log to Sauce Labs,  BrowserStack,  or Capture. Not mandatory. | e.g. `build-1234`
+`proxy` | Proxy server to be used from Selenium and REST API requests. | system, autodetect, direct or http://{hostname}:{port}, e.g. `http://10.3.2.22:80`
+`maxRetryCount` | Attempts to retry a failed test. | e.g. `2`
 
 ## Browser Properties/capabilities
 
 Property | Description | Values
 -------- | ----------- | ------
 `browser`|  The browser on which you wish to run the tests. Defaults to `firefox` if not specified. |`firefox`, `chrome`, `safari`, `ie`, `opera`, `phantomjs`,`legacyfirefox`,`electron`,`custom`
-`browserVersion`| The browser version on which you wish to run the tests. Not mandatory and is only taken into consideration when running remotely e.g. on Selenium Grid,  Sauce Labs or BrowserStack | e.g. `8.0`
 `maximise`| Maximise browser on opening (if possible) | e.g `true`/`false`
 `resolution`| Set browser dimensions to specific setting (if possible) | e.g. `1024x543`
 `firefoxProfile`| Provide a custom firefox profile when opening firefox - eg containing specific authentication settings preset [EDIT - see `customBrowserImpl` below for preferred method] | e.g. `path/to/myCustomFFProfile.profile`
@@ -37,9 +38,13 @@ Property | Description | Values
 `gridURL`| The URL of your Selenium Grid hub. Mandatory if you wish to run your tests on your Selenium Grid. | e.g.`http://localhost:4444/wd/hub` *NB - /wd/hub is required!*
 `browserStack`| Must be set to true if you wish to run on BrowserStack. Defaults to false. |`true`, `false`
 `sauce`| Must be set to true if you wish to run on Sauce Labs. Defaults to false. |`true`, `false`
+`browserVersion`| The browser version on which you wish to run the tests. Not mandatory and is only taken into consideration when running remotely e.g. on Selenium Grid,  Sauce Labs or BrowserStack | e.g. `8.0`
 `platform`| The platform on which you wish to run the tests. Is only taken into consideration when running remotely. To be specified instead of 'os' when running with BrowserStack. | e.g. `windows`, `ios`, `android`, `OSX`
 `platformVersion`| The platform version on which you wish to run the tests. Is only taken into consideration when running remotely. To be specified instead of 'os_version' when running with BrowserStack. | e.g. `5.0`
 `device`| The device on which you wish to run remote tests. If not using SauceLabs or BrowserStack,  can be specified with the `-Dbrowser=chrome` parameter to instigate a Chrome browser emulator of the specified device. |`iPhone`, `iPad`, `iPhone Retina 4-inch`, `Galaxy S4`,  etc….
+`applicationName`| Specify applicationName parameter for a grid run.| e.g. `windows7_32bits_firefox`
+`videoCaptureUrl`| Enable video capture using Grid plugins. Usage of video capture is generic as possible. All grid plugins, such as Selenium Grid Extras, capture videos by the WebDriver session ID.| e.g. `http://localhost:3000/download_video/%s.mp4`
+`appPath`| The path to the apk file to be used in Sauce Labs.| e.g. `/home/dev/android/build/newapp_1.2.5.apk`
 
 ### Remote Supported Devices/Platforms
 **BrowserStack:** [https://www.browserstack.com/list-of-browsers-and-platforms](https://www.browserstack.com/list-of-browsers-and-platforms)
@@ -58,10 +63,19 @@ Property | Description | Values
 `resultVersion`| The 'Version' to mark the test execution against in Zephyr for JIRA (requires ZAPI) | e.g. `App v1.1.2`
 `zapiCycleRegEx`| If the Zephyr test cycle name contains this string test results will be logged against the matching cycles. If not specified,  no further filtering of cycles will happen. | e.g. `firefox` or `my-special-cycle`
 
+## Spira Integration:
+Property | Description | Values
+----|------|------
+`spiraURL`| The base URL of the Spira instance you want to use | e.g. `http://spira:8080`
+ 
 ## Capture Integration:
+A Capture server is a custom server developed to allow Frameworkium tests to send screenshots for each step they are executing. All three need to be defined for the integration to work correctly.
+
 Property | Description | Values
 ----|------|------
 `captureURL`| The base URL of the Capture instance you want to automagically send screenshots and step information to. | e.g. `http://capture:5000`
+`sutName`| The name of the system under test (SUT) to be presented in the Capture server dashboard. | e.g. `New Service`
+`sutVersion`| The release version to appear on teh Capture server dashboard. | e.g. `1.2.5`
 
 ## Examples
 
