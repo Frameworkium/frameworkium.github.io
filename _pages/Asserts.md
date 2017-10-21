@@ -12,11 +12,11 @@ order: 5
 
 Google Truth - `assertThat`
 
-Many assert libraries are available, but we recommend using Google's [Truth](https://google.github.io/truth/) library - it's nice and flexible, produces far more verbose assertion errors, and is already part of frameworkium - just `import static com.google.common.truth.Truth.assertThat;` at the top of your test.
+Many assert libraries are available, but we recommend using Google's [Truth](https://google.github.io/truth/) library - it's nice and flexible, produces far more useful assertion errors, and is part of Frameworkium - just `import static com.google.common.truth.Truth.assertThat;` at the top of your test class.
 
-Some examples:
+## Examples
 
-Basics
+### Basics
 
 ```java
 assertThat(someInt).isEqualTo(5);
@@ -25,7 +25,7 @@ assertThat(aString).contains("lah");
 assertThat(foo).isNotNull();
 ```
 
-Collections and Maps
+### Collections and Maps
 
 ```java
 assertThat(someCollection).contains("a");                       // contains this item
@@ -37,4 +37,4 @@ assertThat(aMap).containsEntry("foo", "bar");                   // has a key, wi
 assertThat(aMap).doesNotContainEntry("foo", "Bar");             // does not have the given entry
 ```
 
-See [here](http://google.github.io/truth/usage/#built-in-propositions) for many many more examples.
+See [here](http://google.github.io/truth/usage/#built-in-propositions) for many more examples.

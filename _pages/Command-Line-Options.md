@@ -7,7 +7,7 @@ order: 1
 ---
 Tests can be executed by running `mvn clean verify` followed by any properties you wish to specify.
 
-*NB see also the "Using Config yaml files..." entry for using config files to provide some or all of these params instead*
+*NB see also the "Using Config yaml files..." entry for using config files to provide a subset of these params instead*
 
 ## General
 
@@ -27,7 +27,7 @@ Property | Description | Values
 `browser`|  The browser on which you wish to run the tests. Defaults to `firefox` if not specified. |`firefox`, `chrome`, `safari`, `ie`, `opera`, `phantomjs`,`legacyfirefox`,`electron`,`custom`
 `maximise`| Maximise browser on opening (if possible) | e.g `true`/`false`
 `resolution`| Set browser dimensions to specific setting (if possible) | e.g. `1024x543`
-`firefoxProfile`| Provide a custom firefox profile when opening firefox - eg containing specific authentication settings preset [EDIT - see `customBrowserImpl` below for preferred method] | e.g. `path/to/myCustomFFProfile.profile`
+`firefoxProfile`| Provide a custom firefox profile when opening firefox - e.g. containing specific authentication settings preset [EDIT - see `customBrowserImpl` below for preferred method] | e.g. `path/to/myCustomFFProfile.profile`
 `chromeUserDataDir`| Set custom chrome user data directory for custom implementations [EDIT - see `customBrowserImpl` below for preferred method] | e.g. `path/to/chrome_user_data_dir`
 `customBrowserImpl`| Used alongside the `-Dbrowser=custom` param. Allows users to specify classname of their own browser implementation, for example for specifying a custom set of DesiredCapabilities | e.g. `ChromeIncognitoBrowserImpl`
 `headless`| Allows users to run Chrome or Firefox in a headless environment | e.g. `headless=true`
@@ -74,9 +74,9 @@ A Capture server is a custom server developed to allow Frameworkium tests to sen
 
 Property | Description | Values
 ----|------|------
-`captureURL`| The base URL of the Capture instance you want to automagically send screenshots and step information to. | e.g. `http://capture:5000`
+`captureURL`| The base URL of the Capture instance you want to automatically send screenshots and step information to. | e.g. `http://capture:5000`
 `sutName`| The name of the system under test (SUT) to be presented in the Capture server dashboard. | e.g. `New Service`
-`sutVersion`| The release version to appear on teh Capture server dashboard. | e.g. `1.2.5`
+`sutVersion`| The release version to appear on the Capture server dashboard. | e.g. `1.2.5`
 
 ## Examples
 
@@ -104,7 +104,7 @@ Running test methods which match the pattern`testM*`on Firefox 36 with Selenium 
 mvn clean verify -Dtest=TestClass#testM* -Dbrowser=firefox -DbrowserVersion=36 -DgridURL=http://grid:4444/wd/hub -DsutName="My Project" -DsutVersion=0.0.1 -DcaptureURL=http://capture:5000
 ```
 
-Running mobile web tests on Chrome,  using their device emulation:
+Running mobile web tests on Chrome, using their device emulation:
 
 ```bash
 mvn clean verify -Dbrowser=chrome -Ddevice="Apple iPad 3 / 4"
@@ -150,9 +150,6 @@ Run regression tests (as marked in JIRA with the label REGRESSION) and log test 
 ```bash
 mvn clean verify -Dbrowser=firefox -DjiraURL=http://jira:8080 -DjiraResultVersion=v1.1.2 -DjqlQuery=labels=REGRESSION
 ```
-
-
-
 
 For full lists of platforms/browsers supported see:
 [BrowserStack](https://www.browserstack.com/list-of-browsers-and-platforms?product=automate) and [SauceLabs](https://saucelabs.com/platforms/) platform lists.

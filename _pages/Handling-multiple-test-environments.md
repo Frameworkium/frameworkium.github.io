@@ -7,13 +7,19 @@ order: 7
 ---
 
 ### Problem
-When a team have multiple staging environments for different purpose within the same project (eg QA, DevInt, Staging), we often need to parameterise multiple variables (Eg urls, usernames, passwords)
+
+A team has multiple environments for different purpose within the same project (e.g. QA, DevInt, Staging),
+we often need to parameterise multiple variables (e.g. urls, usernames, passwords).
 
 ### Solution
-Store the details for all environments in a properties file, and pass an environemnt 'key' at runtime to tell the code which parameters to use.
+
+Store the details for all environments in a properties file, and pass an environment 'key' at
+runtime to tell the code which parameters to use.
 
 #### Create a properties file
-The properties file must be in your */resources* folder. In your properties file, define the key and value pair for each URL and any other information.
+
+The properties file must be in your */resources* folder.
+In your properties file, define the key and value pair for each URL and any other information.
 
 In this case:
 
@@ -72,30 +78,32 @@ public class Config {
     public static String getPassword() {
         return getProperty("password");
     }
+}
 ```
 
 #### Use the values from the Config in the Page Object/Test
 
-In your *tests* layer:
+In your *test* layer:
 
 ```java
-      XYZPage xyzPage = XYZPage.open();
-      xYZPage.typeNameTextBox(Config.getUsername())
-             .then().typePasswordTextBox(Config.getPassword())
-             .then().clickLoginButton();
+XYZPage xyzPage = XYZPage.open();
+xYZPage.typeNameTextBox(Config.getUsername())
+        .then().typePasswordTextBox(Config.getPassword())
+        .then().clickLoginButton();
 ```
 
 And in your *pages* layer:
 
 ```java
-    @Step("Navigate to XYZ Page")
-    public static XYZPage open() {
-        return PageFactory.newInstance(XYZPage.class,
-                Config.getBaseURL() + "welcome.com");
-    }
+@Step("Navigate to XYZ Page")
+public static XYZPage open() {
+    return PageFactory.newInstance(XYZPage.class,
+            Config.getBaseURL() + "welcome.com");
+}
 ```
 
 #### Specify which environment to use via command line when executing tests
+
 Choose which environment to run your test in by specifying  the corresponding "key"
 
 `mvn clean verify -DenvironmentKey=staging`

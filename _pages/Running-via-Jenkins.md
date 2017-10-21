@@ -8,6 +8,7 @@ order: 9
 
 ## Why bother?
 
+- Enables Continuous Integration (CI)
 - It encourages good source control practice
 - You can kick stuff off and leave it overnight
 - It can be triggered by other builds
@@ -22,5 +23,5 @@ order: 9
 ## Parameters
 
 - Set up build parameters for each (or the ones you'll need) of the [command line variables](http://frameworkium.github.io/#_pages/Command-Line-Options.md) we can pass in
-- eg a variable called `BROWSER` which has a dropdown list of firefox, chrome, safari, etc
-- Pass these parameters into the relevant section of the maven build job - eg `mvn test -Dbrowser=$BROWSER`
+- e.g. a variable called `BROWSER` which has a dropdown list of firefox, chrome, safari, etc.
+- Pass these parameters into the relevant section of the maven build job - e.g. `mvn test -Dbrowser=$BROWSER`

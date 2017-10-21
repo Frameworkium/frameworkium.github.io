@@ -1,12 +1,14 @@
 ---
 layout: post
-title:  "Using Config yaml files Rather than Command Line params"
+title:  "Using Config Files Rather than Command Line params"
 category: wiki
 section: 6 - Advanced Usage
 order: 0
 ---
 
-More detail soon... but rather than providing all of the details in the command line, you can instead create config files (in your `resources` folder) to store common configurations. An example would be:
+Rather than providing all of the details in the command line,
+you can instead create config files (in your `resources` folder) to store common configurations.
+An example would be:
 
 `/resources/config/FirefoxGrid.yaml`:
 
