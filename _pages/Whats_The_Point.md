@@ -1,10 +1,16 @@
 ---
 layout: post
 title: "What it's for"
-section: 1 - Whats The Point?
+section: 1 - What's The Point?
 order: 1
 category: wiki
 ---
 
-Frameworkium wraps together a load of nice java libraries and other bits and bobs, to make writing tests - be they web tests, app tests, api tests, other tests that we've not yet thought of - more consistent and more familiar. Ideally, it should mean you spend less time worrying about *plumbing*, and more time thinking about the actual tests themselves. It should also mean your test projects stay clean and **focussed on the testing**, rather than full of helpers and widgets.
+Frameworkium provides strong code structure guidelines and contains some nice Java libraries
+to make writing tests (web, mobile app, API, other tests that we've not thought of yet) more consistent and familiar.
 
+It saves reinventing the wheel.
+
+It should mean you spend less time worrying about the *plumbing*, and more time thinking about the actual tests themselves.
+Your test projects should also stay structured, clean and **focused on the testing**,
+rather than full of helpers and widgets.
