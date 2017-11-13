@@ -58,9 +58,9 @@ Property | Description | Values
 `jiraURL`| The base URL of the JIRA instance you want to use | e.g. `http://jira:8080`
 `jiraUsername`| The JIRA user you want to use | e.g. `rgates`
 `jiraPassword`| The JIRA user's password | e.g. `password`
-`jqlQuery`| the JQL query to use to look up the JIRA tests to run (the results of the query will be looked up against the @Issue annotations on tests | e.g. `(priority=1 and component=Admin) or issueKey=JIRA-123`
-`jiraResultFieldName`| The jira field name to attempt to log results to for the specified @Issue. The values to change the field to are specified in the jira config file. Useful if you're using a jira field to mark the test result | e.g. `Test Result`
-`jiraResultTransition`| If specified,  will attempt to transition the @Issue specified through the transitions specified in the jira config. Useful if using a customised jira workflow for managing test results,  for example | e.g. `true`
+`jqlQuery`| the JQL query to use to look up the JIRA tests to run (the results of the query will be looked up against the `@Issue` annotations on tests | e.g. `(priority=1 and component=Admin) or issueKey=JIRA-123`
+`jiraResultFieldName`| The jira field name to attempt to log results to for the specified `@Issue`. The values to change the field to are specified in the jira config file. Useful if you're using a jira field to mark the test result | e.g. `Test Result`
+`jiraResultTransition`| If specified,  will attempt to transition the `@Issue` specified through the transitions specified in the jira config. Useful if using a customised jira workflow for managing test results,  for example | e.g. `true`
 `resultVersion`| The 'Version' to mark the test execution against in Zephyr for JIRA (requires ZAPI) | e.g. `App v1.1.2`
 `zapiCycleRegEx`| If the Zephyr test cycle name contains this string test results will be logged against the matching cycles. If not specified,  no further filtering of cycles will happen. | e.g. `firefox` or `my-special-cycle`
 

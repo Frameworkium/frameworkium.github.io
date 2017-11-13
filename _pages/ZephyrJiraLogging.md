@@ -21,11 +21,11 @@ Frameworkium will log the results of test runs to Jira in real time - making it 
 ```java
 public class ComponentExampleTest extends BaseTest {
 
-  @TestCaseId("JIRA-1411")
-  @Test
-  public void myLovelyTest() {
-  	//some testing
-  }
+    @TestCaseId("JIRA-1411")
+    @Test
+    public void myLovelyTest() {
+        //some testing
+    }
 }
 ```
 
@@ -35,8 +35,8 @@ OR, if using BDD:
 @TestCaseId:JIRA-1411
 Feature: My Lovely Feature that needs testing
 
-  @TestCaseId:JIRA-1412
-  Scenario: Or my lovely scenario
+@TestCaseId:JIRA-1412
+Scenario: Or my lovely scenario
 ```
 
 ### 2 - Make sure test is in Zephyr for Jira test plan

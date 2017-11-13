@@ -6,74 +6,93 @@ section: 2 - Basics
 order: 4
 ---
 
-## Extend Base Page
+## Code Structure
 
-Test classes must extend com.frameworkium.pages.internal.BasePage. This handles the setup and teardown of the WebDriver / AppiumDriver sessions.
+### BasePage
+
+Page objects must extend `com.frameworkium.pages.internal.BasePage<T>`.
+
+Where `T` is the type of the page you are creating e.g. `LoginPage`.
+This enables most Frameworkium features to work.
+
+### Elements (top)
+
+Elements should be `private`, they should only be used by this class.
+
+#### Annotations
+
+- `@Name` allows additional reporting and debugging information to be used later.
+- `@Visible` will tell Frameworkium to wait for the element to be displayed before returning the page.
+- `@FindBy` is a [Selenium annotation][find-by-docs].
+
+### Actions (bottom)
+
+All `public` methods on the page (the page's interface) should return either:
+
+- a Page Object,
+- built-in Java data types e.g. `String` or 
+- custom data types and 
+- **nothing** Frameworkium or Selenium specific e.g. `WebElement`
+
+#### Navigation
+
+If an action on a page results in moving to a new page, then you can instantiate a new
+Page Object in one of two ways:
+
+- `return new NextPagePageObject().get();` or
+- `return PageFactory.newInstance(NextPagePageObject.class);`
+
+A common mistake is omitting the `.get()` which results in a null pointer exception when
+trying to use the returned page object, this is because none of the fields (WebElements) would
+have been initialised.
+
+See the `validLogin()` method below.
+
+If performing an action on a page results in staying on the same page, then you can simply use
+`return this;` e.g. the `invalidLogin()` method below.
+
+#### Annotations
+
+- `@Step` enables rich reporting of the steps being run.
+`{0}` and `{1}` (in the example below) will be replaced in reports with the values passed into the method.
+
+### Example
 
 ```java
 public class LoginPage extends BasePage<LoginPage> {
+    
+    @Name("Username text field")
+    @Visible
+    @FindBy(css="input#inputEmail")
+    private WebElement usernameField;
+    
+    @Name("Password text field")
+    @FindBy(css="input#inputPassword")
+    private WebElement passwordField;
+    
+    @Step("Enter credentials and return logged in homepage")
+    public LoggedInHomepage validLogin(String username, String password) {
+        login(username, password);
+        return new LoggedInHomepage().get();
+    }
+    
+    @Step("Enter credentials and expect to stay on the login screen")
+    public LoginPage invalidLogin(String username, String password) {
+        login(username, password);
+        return this;
+    }
+    
+    @Step("Enter username {0} and password {1} and click login")
+    private void login(String username, String password) {
+        usernameField.clear();
+        usernameField.sendKeys(username);
+    
+        passwordField.clear();
+        passwordField.sendKeys(password);
+    
+        loginButton.click();
+    }
+}
 ```
 
-## Pages - Elements at the top, Operations at the bottom
-
-### Elements
-
-```java
-	  @Name("Username text field")
-	  @Visible
-	  @FindBy(css="input#inputEmail")
-	  private WebElement usernameField;
-
-	  @Name("Password text field")
-	  @Visible
-	  @FindBy(css="input#inputPassword")
-	  private WebElement passwordField;
-
-	  @Name("Invalid login warning")
-	  @FindBy(css="div#invalid-login")
-	  private WebElement invalidLoginWarning;
-```
-
-- The @Name annotation allows additional reporting and debugging information to be used later.
-- The @Visible annotation will tell the PageFactory to wait for the element to be displayed before returning the page.
-- The @FindBy annotation is a selenium annotation - see help [here](https://selenium.googlecode.com/git/docs/api/java/org/openqa/selenium/support/FindBy.html) - that simplifies location of elements
-- Finally, elements should be `private`, as they should only be used by this class!
-
-### Operations
-
-```java
-	@Step("Enter credentials and return logged in homepage")
-	public LoggedInHomepage validLogin(String username, String password)
-	{
-		login(username, password);
-		return PageFactory.newInstance(LoggedInHomepage.class);
-	}
-
-	@Step("Enter credentials and expect to stay on the login screen")
-	public LoginPage invalidLogin(String username, String password)
-	{
-		login(username, password);
-		return this;
-	}
-
-	@Step("Enter username {0} and password {1} and click login")
-	private void login(String username, String password)
-	{
-		usernameField.clear();
-		usernameField.sendKeys(username);
-
-		passwordField.clear();
-		passwordField.sendKeys(password);
-
-		loginButton.click();
-	}
-```
-
-- The @Step annotation will be interpreted later on to enable rich reporting of the steps being run - the {0} and {1} in the example above will be replaced in the reports with the variable passed into the method
-- Methods that perform operations on the page, but are only used by other methods on the page (eg 'login') should be marked as `private`, as they're only used by this page!
-
-**NB All public methods on the page should return a Page Object!**
-eg:
-
-* if clicking something on the page that results in you moving to a new page, then `return PageFactory.newInstance(NextPagePageObject.class);` - eg the validLogin() method above
-* if clicking a button on the page results in you staying on the same page, then `return this;` - eg the invalidLogin() method above.
+[find-by-docs]: https://selenium.googlecode.com/git/docs/api/java/org/openqa/selenium/support/FindBy.html

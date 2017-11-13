@@ -6,18 +6,23 @@ section: 5 - Logging & Reporting
 order: 7
 ---
 
-You can generate an [Allure](http://allure.qatools.ru/) test report by simply running:
+You can generate an [Allure][allure] test report by running:
 
-``` bash
+```bash
 mvn site
 ```
 
-Open target/site/allure-maven-plugin.html to view the report.
+Then, open `target/site/allure-maven-plugin.html` to view the report.
 
-*(NB if you try and open the file locally in chrome, chrome doesn't like opening file://blah files and the report won't display properly. Either open via IntelliJ (they host it on a local webserver for you) or use another browser!)*
+_NB Either open via IntelliJ (they host it on a local web server for you) or use another browser!_
 
-This will interpret @Step, @Issue, @Features and @Story annotations, and provide rich reporting on the suite just run.
+This will interpret `@Step`, `@Issue`, `@Features` and `@Story` annotations,
+and provide rich reporting on the suite just run.
 
-## Jenkins + Allure Reporting
+## Jenkins
 
-When run via Jenkins, the [allure-jenkins-plugin](https://wiki.jenkins.io/display/JENKINS/Allure+Plugin) can be added to the jenkins job, and will automatically produce and store reports for every job run.
+When running tests via Jenkins, the [Allure Jenkins Plugin][allure-jenkins-plugin] can be added to
+the Jenkins job, and it will automatically produce and store reports for every run.
+
+[allure]: http://allure.qatools.ru/
+[allure-jenkins-plugin]: https://wiki.jenkins.io/display/JENKINS/Allure+Plugin
