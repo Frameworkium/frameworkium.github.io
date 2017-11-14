@@ -15,6 +15,7 @@ Property | Description | Values
 -------- | ----------- | ------
 `test`| The test class,  or list of test classes (separated by commas),  to run. Can include wildcards. | e.g. `TflLoginWebTests, Heroku*`
 `threads`| The number of threads to use. Defaults to 1 if not specified. | e.g. `3`
+`reuseBrowser` | Will re-use existing browsers rather than starting a new instance for each test. | `true` or `false`
 `groups`| The TestNG test groups which you wish to run. All tests groups will run if not specified. | e.g.`checkintest`
 `build`| The build version or app version to log to Sauce Labs,  BrowserStack,  or Capture. Not mandatory. | e.g. `build-1234`
 `proxy` | Proxy server to be used from Selenium and REST API requests. | system, autodetect, direct or http://{hostname}:{port}, e.g. `http://10.3.2.22:80`
