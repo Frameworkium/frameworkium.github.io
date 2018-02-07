@@ -5,8 +5,9 @@ category: wiki
 section: 2 - Basics
 order: 1
 ---
-Tests can be executed by running `mvn clean verify` followed by any properties,
-in the form `-DpropertyName=value`, you wish to specify.
+Tests can be executed by running `mvn clean verify`.
+This can be followed by any properties, in the form `-DpropertyName=value`,
+you wish to specify.
 
 **See also** the "Using Config yaml files..." entry for using config files
 to provide a subset of these params instead
@@ -15,10 +16,10 @@ to provide a subset of these params instead
 
 Property | Description | Values | Default
 -------- | ----------- | ------ | -------
-`test`| The test class, or comma separated list of test classes, to run. Can include wildcards. | e.g. `TflLoginWebTests, Heroku*` | All tests
+`test`| The test class, or comma separated list of test classes, to run. Can include wildcards. | e.g. `MyTest*` | All tests
 `threads`| The number of threads to use. | e.g. `3` | 1
 `reuseBrowser` | Will re-use existing browsers rather than starting a new instance for each test. | `true` or `false` |  `false`
-`groups`| The TestNG test groups which you wish to run. | e.g.`checkintest` | All groups
+`groups`| The TestNG test groups which you wish to run. | e.g. `checkintest` | All groups
 `build`| The build version or app version to log to Sauce Labs, BrowserStack, or Capture. | e.g. `build-1234` | none
 `proxy` | Proxy server to be used from Selenium and REST API requests. | `system`, `autodetect`, `direct` or `http://{hostname}:{port}`, e.g. `http://10.3.2.22:80` | none
 `maxRetryCount` | Additional attempts to retry a failed test. | e.g. `3` | 1
