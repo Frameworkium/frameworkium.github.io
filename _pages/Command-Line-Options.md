@@ -5,83 +5,98 @@ category: wiki
 section: 2 - Basics
 order: 1
 ---
-Tests can be executed by running `mvn clean verify` followed by any properties you wish to specify.
+Tests can be executed by running `mvn clean verify` followed by any properties,
+in the form `-DpropertyName=value`, you wish to specify.
 
-*NB see also the "Using Config yaml files..." entry for using config files to provide a subset of these params instead*
+**See also** the "Using Config yaml files..." entry for using config files
+to provide a subset of these params instead
 
 ## General
 
+Property | Description | Values | Default
+-------- | ----------- | ------ | -------
+`test`| The test class, or comma separated list of test classes, to run. Can include wildcards. | e.g. `TflLoginWebTests, Heroku*` | All tests
+`threads`| The number of threads to use. | e.g. `3` | 1
+`reuseBrowser` | Will re-use existing browsers rather than starting a new instance for each test. | `true` or `false` |  `false`
+`groups`| The TestNG test groups which you wish to run. | e.g.`checkintest` | All groups
+`build`| The build version or app version to log to Sauce Labs, BrowserStack, or Capture. | e.g. `build-1234` | none
+`proxy` | Proxy server to be used from Selenium and REST API requests. | `system`, `autodetect`, `direct` or `http://{hostname}:{port}`, e.g. `http://10.3.2.22:80` | none
+`maxRetryCount` | Additional attempts to retry a failed test. | e.g. `3` | 1
+
+## Browser Properties/Capabilities
+
+Property | Description | Values | Default
+-------- | ----------- | ------ | -------
+`browser`|  The browser on which you wish to run the tests. |`firefox`, `chrome`, `safari`, `ie`, `opera`, `phantomjs`,`legacyfirefox`,`electron`,`custom` | `firefox`
+`maximise`| Maximise browser on opening (if possible). | `true` or `false` | `false`
+`resolution`| Set browser dimensions to specific setting (if possible). | e.g. `1024x543` | none
+`firefoxProfile`| Legacy. See `customBrowserImpl` below for preferred method. Which will also be changing soon, once upgrade to Selenium to 3.7.1 is complete. | e.g. `path/to/CustomFF.profile` | none
+`chromeUserDataDir`| Legacy. See `customBrowserImpl` below for preferred method. | e.g. `path/to/chrome_user_data_dir` | none
+`customBrowserImpl`| Used alongside the `-Dbrowser=custom` param. Allows users to specify classname of their own browser implementation, for example for specifying a custom set of `Capabilities`. | e.g. `ChromeIncognitoBrowserImpl` | none
+`headless`| Allows users to run Chrome or Firefox in a headless environment | `true` or `false` | `false`
+
+## Remote Grids. Devices and Platforms
+
+No defaults.
+
 Property | Description | Values
 -------- | ----------- | ------
-`test`| The test class,  or list of test classes (separated by commas),  to run. Can include wildcards. | e.g. `TflLoginWebTests, Heroku*`
-`threads`| The number of threads to use. Defaults to 1 if not specified. | e.g. `3`
-`reuseBrowser` | Will re-use existing browsers rather than starting a new instance for each test. | `true` or `false`
-`groups`| The TestNG test groups which you wish to run. All tests groups will run if not specified. | e.g.`checkintest`
-`build`| The build version or app version to log to Sauce Labs,  BrowserStack,  or Capture. Not mandatory. | e.g. `build-1234`
-`proxy` | Proxy server to be used from Selenium and REST API requests. | system, autodetect, direct or http://{hostname}:{port}, e.g. `http://10.3.2.22:80`
-`maxRetryCount` | Attempts to retry a failed test. | e.g. `2`
-
-## Browser Properties/capabilities
-
-Property | Description | Values
--------- | ----------- | ------
-`browser`|  The browser on which you wish to run the tests. Defaults to `firefox` if not specified. |`firefox`, `chrome`, `safari`, `ie`, `opera`, `phantomjs`,`legacyfirefox`,`electron`,`custom`
-`maximise`| Maximise browser on opening (if possible) | e.g `true`/`false`
-`resolution`| Set browser dimensions to specific setting (if possible) | e.g. `1024x543`
-`firefoxProfile`| Provide a custom firefox profile when opening firefox - e.g. containing specific authentication settings preset [EDIT - see `customBrowserImpl` below for preferred method] | e.g. `path/to/myCustomFFProfile.profile`
-`chromeUserDataDir`| Set custom chrome user data directory for custom implementations [EDIT - see `customBrowserImpl` below for preferred method] | e.g. `path/to/chrome_user_data_dir`
-`customBrowserImpl`| Used alongside the `-Dbrowser=custom` param. Allows users to specify classname of their own browser implementation, for example for specifying a custom set of DesiredCapabilities | e.g. `ChromeIncognitoBrowserImpl`
-`headless`| Allows users to run Chrome or Firefox in a headless environment | e.g. `headless=true`
-
-## Remote Grids/Different devices & platforms
-
-Property | Description | Values
-----|------|------
-`gridURL`| The URL of your Selenium Grid hub. Mandatory if you wish to run your tests on your Selenium Grid. | e.g.`http://localhost:4444/wd/hub` *NB - /wd/hub is required!*
-`browserStack`| Must be set to true if you wish to run on BrowserStack. Defaults to false. |`true`, `false`
-`sauce`| Must be set to true if you wish to run on Sauce Labs. Defaults to false. |`true`, `false`
-`browserVersion`| The browser version on which you wish to run the tests. Not mandatory and is only taken into consideration when running remotely e.g. on Selenium Grid,  Sauce Labs or BrowserStack | e.g. `8.0`
-`platform`| The platform on which you wish to run the tests. Is only taken into consideration when running remotely. To be specified instead of 'os' when running with BrowserStack. | e.g. `windows`, `ios`, `android`, `OSX`
-`platformVersion`| The platform version on which you wish to run the tests. Is only taken into consideration when running remotely. To be specified instead of 'os_version' when running with BrowserStack. | e.g. `5.0`
-`device`| The device on which you wish to run remote tests. If not using SauceLabs or BrowserStack,  can be specified with the `-Dbrowser=chrome` parameter to instigate a Chrome browser emulator of the specified device. |`iPhone`, `iPad`, `iPhone Retina 4-inch`, `Galaxy S4`,  etc….
+`gridURL`| The URL of your Selenium Grid hub. | e.g.`http://localhost:4444/wd/hub` - NB `/wd/hub` is required!
+`browserStack`| Must be set to `true` if you wish to run on BrowserStack. | `true` or `false`
+`sauce`| Must be set to true if you wish to run on Sauce Labs. | `true` or `false`
+`browserVersion`| The browser version on which you wish to run the tests. Only used when running remotely e.g. on Selenium Grid, Sauce Labs or BrowserStack. | e.g. `8.0`
+`platform`| The platform on which you wish to run the tests. Only used when running remotely. To be specified instead of 'os' when running with BrowserStack. | e.g. `windows`, `ios`, `android`, `OSX`
+`platformVersion`| The platform version on which you wish to run the tests. Only used when running remotely. To be specified instead of 'os_version' when running with BrowserStack. | e.g. `5.0`
+`device`| The device on which you wish to run remote tests. If not using SauceLabs or BrowserStack, can be specified with the `-Dbrowser=chrome` parameter to instigate a Chrome browser emulator of the specified device. |`iPhone`, `iPad`, `iPhone Retina 4-inch`, `Galaxy S4`, etc.
 `applicationName`| Specify applicationName parameter for a grid run.| e.g. `windows7_32bits_firefox`
 `videoCaptureUrl`| Enable video capture using Grid plugins. Usage of video capture is generic as possible. All grid plugins, such as Selenium Grid Extras, capture videos by the WebDriver session ID.| e.g. `http://localhost:3000/download_video/%s.mp4`
-`appPath`| The path to the apk file to be used in Sauce Labs. It is also used as the `app` desired capability of the supported [WinAppDriver](https://github.com/Microsoft/WinAppDriver) | e.g. `/home/dev/android/build/newapp_1.2.5.apk` for SauceLabs or `Microsoft.WindowsAlarms_8wekyb3d8bbwe!App`, or `C:\Windows\System32\notepad.exe` for the WinAppDriver.
+`appPath`| The path to the apk file to be used in Sauce Labs. It is also used as the `app` desired capability of the supported [WinAppDriver](https://github.com/Microsoft/WinAppDriver). | e.g. `/home/dev/android/build/newapp_1.2.5.apk` for SauceLabs or `Microsoft.WindowsAlarms_8wekyb3d8bbwe!App`, or `C:\Windows\System32\notepad.exe` for the WinAppDriver.
 
 ### Remote Supported Devices/Platforms
-**BrowserStack:** [https://www.browserstack.com/list-of-browsers-and-platforms](https://www.browserstack.com/list-of-browsers-and-platforms)
-**SauceLabs:** [https://saucelabs.com/platforms](https://saucelabs.com/platforms)
 
-## Jira/Zephyr/Test Result Logging Integrations:
+- [BrowserStack](https://www.browserstack.com/list-of-browsers-and-platforms)
+- [SauceLabs](https://saucelabs.com/platforms)
+
+## Jira/Zephyr/Test Result Logging Integrations
+
+No defaults.
 
 Property | Description | Values
-----|------|------
+-------- | ----------- | ------
 `jiraURL`| The base URL of the JIRA instance you want to use | e.g. `http://jira:8080`
-`jiraUsername`| The JIRA user you want to use | e.g. `rgates`
+`jiraUsername`| The JIRA user you want to use | e.g. `JBloggs`
 `jiraPassword`| The JIRA user's password | e.g. `password`
 `jqlQuery`| the JQL query to use to look up the JIRA tests to run (the results of the query will be looked up against the `@Issue` annotations on tests | e.g. `(priority=1 and component=Admin) or issueKey=JIRA-123`
-`jiraResultFieldName`| The jira field name to attempt to log results to for the specified `@Issue`. The values to change the field to are specified in the jira config file. Useful if you're using a jira field to mark the test result | e.g. `Test Result`
-`jiraResultTransition`| If specified,  will attempt to transition the `@Issue` specified through the transitions specified in the jira config. Useful if using a customised jira workflow for managing test results,  for example | e.g. `true`
+`jiraResultFieldName`| The Jira field name to attempt to log results to for the specified `@Issue`. The values to change the field to are specified in the Jira config file. Useful if you're using a Jira field to mark the test result | e.g. `Test Result`
+`jiraResultTransition`| If specified, will attempt to transition the `@Issue` specified through the transitions specified in the Jira config. Useful if using a customised Jira workflow for managing test results. | any value
 `resultVersion`| The 'Version' to mark the test execution against in Zephyr for JIRA (requires ZAPI) | e.g. `App v1.1.2`
-`zapiCycleRegEx`| If the Zephyr test cycle name contains this string test results will be logged against the matching cycles. If not specified,  no further filtering of cycles will happen. | e.g. `firefox` or `my-special-cycle`
+`zapiCycleRegEx`| If the Zephyr test cycle name contains this string test results will be logged against the matching cycles. | e.g. `firefox` or `my-special-cycle`
 
-## Spira Integration:
+## Spira Integration
+
+No defaults.
+
 Property | Description | Values
-----|------|------
+---------|-------------|-------
 `spiraURL`| The base URL of the Spira instance you want to use | e.g. `http://spira:8080`
  
-## Capture Integration:
-A Capture server is a custom server developed to allow Frameworkium tests to send screenshots for each step they are executing. All three need to be defined for the integration to work correctly.
+## Capture Integration
+
+A Capture server is a custom server developed to allow Frameworkium tests to 
+send screenshots for each step they are executing.
+All three need to be defined for the integration to work correctly.
+
+No defaults.
 
 Property | Description | Values
-----|------|------
+---------|-------------|-------
 `captureURL`| The base URL of the Capture instance you want to automatically send screenshots and step information to. | e.g. `http://capture:5000`
 `sutName`| The name of the system under test (SUT) to be presented in the Capture server dashboard. | e.g. `New Service`
 `sutVersion`| The release version to appear on the Capture server dashboard. | e.g. `1.2.5`
 
 ## Examples
 
-Running web tests using Firefox:
+Running tests using Firefox:
 
 ```bash
 mvn clean verify
@@ -93,16 +108,16 @@ Running web tests using Chrome:
 mvn clean verify -Dbrowser=chrome
 ```
 
-Running web tests on Firefox 34.0.5 with Selenium Grid:
+Running web tests on Firefox 58.0.1 with Selenium Grid:
 
 ```bash
-mvn clean verify -Dbrowser=firefox -DbrowserVersion=34.0.5 -DgridURL=http://localhost:4444/wd/hub
+mvn clean verify -Dbrowser=firefox -DbrowserVersion=58.0.1 -DgridURL=http://localhost:4444/wd/hub
 ```
 
-Running test methods which match the pattern`testM*`on Firefox 36 with Selenium Grid and Capture:
+Running test methods which match the pattern`testM*`on Firefox with Selenium Grid and Capture:
 
 ```bash
-mvn clean verify -Dtest=TestClass#testM* -Dbrowser=firefox -DbrowserVersion=36 -DgridURL=http://grid:4444/wd/hub -DsutName="My Project" -DsutVersion=0.0.1 -DcaptureURL=http://capture:5000
+mvn clean verify -Dtest=TestClass#testM* -Dbrowser=firefox -DgridURL=http://grid:4444/wd/hub -DsutName="My Project" -DsutVersion="0.0.1" -DcaptureURL=http://capture:5000
 ```
 
 Running mobile web tests on Chrome, using their device emulation:
@@ -116,7 +131,7 @@ Running mobile web tests on BrowserStack Win XP Firefox 33:
 ```bash
 export BROWSER_STACK_USERNAME=<username>
 export BROWSER_STACK_ACCESS_KEY=<access_key>
-mvn clean verify -DbrowserStack=true -Dbrowser=firefox -DbrowserVersion=33 -Dplatform=Windows -DplatformVersion=XP
+mvn clean verify -DbrowserStack=true -Dbrowser=firefox -DbrowserVersion=57.0 -Dplatform=Windows -DplatformVersion=XP
 ```
 
 Running mobile web tests on Sauce Labs iOS 8.0 iPad Simulator:
@@ -135,8 +150,8 @@ export BROWSER_STACK_ACCESS_KEY=<access_key>
 mvn clean verify -DbrowserStack=true -Dbrowser=ios -Ddevice="iPad Air"
 ```
 
-NB - platform and platformVersion (os & os_version in BrowserStack config) are not required or supported when running on mobile devices
-
+NB - platform and platformVersion (os & os_version in BrowserStack config) are 
+not required or supported when running on mobile devices
 
 Running mobile app tests on Sauce Labs Android Emulator:
 
@@ -146,11 +161,13 @@ export SAUCE_ACCESS_KEY=<access_key>
 mvn clean verify -Dsauce=true -Dplatform=android -DappPath=<path_to_.apk>
 ```
 
-Run regression tests (as marked in JIRA with the label REGRESSION) and log test results against the v1.1.2 version in JIRA:
+Run regression tests (as marked in JIRA with the label REGRESSION) and log test 
+results against the v1.1.2 version in JIRA:
 
 ```bash
-mvn clean verify -Dbrowser=firefox -DjiraURL=http://jira:8080 -DjiraResultVersion=v1.1.2 -DjqlQuery=labels=REGRESSION
+mvn clean verify -Dbrowser=firefox -DjiraURL=http://jira:8080 -DjiraResultVersion=v1.1.2 -DjqlQuery="labels=REGRESSION"
 ```
 
 For full lists of platforms/browsers supported see:
-[BrowserStack](https://www.browserstack.com/list-of-browsers-and-platforms?product=automate) and [SauceLabs](https://saucelabs.com/platforms/) platform lists.
+[BrowserStack](https://www.browserstack.com/list-of-browsers-and-platforms?product=automate) 
+and [SauceLabs](https://saucelabs.com/platforms/) platform lists.
