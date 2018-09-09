@@ -44,9 +44,13 @@ Then run your tests with:
 
 `mvn clean verify -DcustomBrowserImpl=ChromeIncognitoImpl`
 
+Since 3.0.0:
+
+`mvn clean verify -DcustomBrowserImpl=my.package.ChromeIncognitoImpl`
+
 ### Using Appium
 
-As of version 3.0 Appium is no longer part of core. However you can easily use
+As of version 3.0.0 Appium is no longer part of core. However you can easily use
 it by implementing a CustomBrowserImpl.
 
 ```java
