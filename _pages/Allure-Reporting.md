@@ -12,6 +12,12 @@ You can generate an [Allure][allure] test report by running:
 mvn site
 ```
 
+or, since v3.0.0
+
+```bash
+mvn allure:report
+```
+
 Then, open `target/site/allure-maven-plugin.html` to view the report.
 
 _NB Either open via IntelliJ (they host it on a local web server for you) or use another browser!_
