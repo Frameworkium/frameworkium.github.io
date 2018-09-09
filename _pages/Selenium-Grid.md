@@ -6,7 +6,8 @@ section: 6 - Advanced Usage
 order: 1
 ---
 
-We've already shown that you can use Frameworkium to run your tests on a grid, just by specifying the gridURL parameter at runtime:
+We've already shown that you can use Frameworkium to run your tests on a grid,
+just by specifying the gridURL parameter at runtime:
 
 ```bash
 mvn clean verify -DgridURL=http://someurl:4444/wd/hub

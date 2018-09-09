@@ -10,17 +10,19 @@ order: 8
 
 Do **NOT** use these unless it's the last remaining option.
 
-Your tests are supposed to be simulating user actions and user flows, so injecting JavaScript is 
-_not_ to be used unless some weirdness means that selenium cannot do something that a user can.
+Your tests are supposed to be simulating user actions and user flows, so 
+injecting JavaScript is _not_ to be used unless some weirdness means that 
+Selenium cannot do something that a user can.
 
 ## Example: Un-Hiding Hidden Controls
 
 In order to upload a file to a site, the 'choose files' input control is used.
-See [Native Controls][native] for how we handle this scenario using the `SendKeys` directly to input controls.
+See [Native Controls](Native-Controls.md) for how we handle this scenario using
+the `SendKeys` directly to input controls.
 
 ### Problem
 
-In some cases, the input control might be hidden on the page, with a `div` on top of it:
+In some cases, the input might be hidden on the page, with a `div` occluding it:
 
 ```html
 <div id="input-button">
@@ -50,7 +52,7 @@ public void tryAnUpload(File fileToUpload) {
 
 On page load, Frameworkium will try to un-hide the control with JavaScript.
 If you'd like to control when it happens, use
-`this.visibility.forceVisible(uploadInput)` instead of `@ForceVisible`.
+`visibility.forceVisible(uploadInput)` instead of `@ForceVisible`.
 
 ### Old Solution
 
@@ -60,35 +62,34 @@ input such that selenium can interact with it.
 The method below demonstrates this.
 
 ```java
-@Name("Upload input")
-@FindBy(css="div#upload-button input")
-private WebElement uploadInput;
-
-@Step("Upload a file")
-public void tryAnUpload(File fileToUpload) {
-  // CSS Locator for the hidden input button
-  String cssSelector = "div#upload-button input";
-
-  // Use JavaScript executor to make the input button visible
-  // 'super' as it's using a method on the superclass (BasePage)
-  super.executeJS("document.querySelector('" + cssSelector + "').style.width = '200px'");
-  super.executeJS("document.querySelector('" + cssSelector + "').style.height = '10px'");
-  super.executeJS("document.querySelector('" + cssSelector + "').style.opacity = '100'");
-
-  // Send the file path directly to the input button via sendKeys
-  uploadInput.sendKeys(fileToUpload.getAbsolutePath());
+public class MyPage extends BasePage<MyPage> {
+    @Name("Upload input")
+    @FindBy(css = "div#upload-button input")
+    private WebElement uploadInput;
+    
+    @Step("Upload a file")
+    public void tryAnUpload(File fileToUpload) {
+      // CSS Locator for the hidden input button
+      String cssSelector = "div#upload-button input";
+    
+      // Use JavaScript executor to make the input button visible
+      executeJS("document.querySelector('" + cssSelector + "').style.width = '200px'");
+      executeJS("document.querySelector('" + cssSelector + "').style.height = '10px'");
+      executeJS("document.querySelector('" + cssSelector + "').style.opacity = '100'");
+    
+      // Send the file path directly to the input button via sendKeys
+      uploadInput.sendKeys(fileToUpload.getAbsolutePath());
+    }
 }
 ```
 
-This sort of idea can also be used if you need to do more than `@ForceVisible` or would like to
-have more control over what happens, it's just a bit more verbose.
+This sort of idea can also be used if you need to do more than `@ForceVisible` 
+or would like to have more control over what happens, it's just a bit more verbose.
 
 ## Trade Offs
 
 UI automation testing is largely about simulating user's behaviour as best we can.
-We could use some other tool (e.g. autoIt, Sikuli, call the JavaScript function directly etc.),
-but the additional flakiness and complexity this introduces will likely outweigh the benefit.
+We could use some other tool (e.g. AutoIt, Sikuli, call JavaScript etc.),
+but the additional flakiness and complexity this introduces might outweigh the benefit.
 
 It's about choosing the simplest and most reliable approach to get the job done.
-
-[native]: /#_pages/Native-Controls.md

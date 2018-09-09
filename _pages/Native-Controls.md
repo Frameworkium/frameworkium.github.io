@@ -29,12 +29,18 @@ driver.switchTo().alert().authenticationWith(credentials);
 
 ## Handling file pickers - e.g. 'Choose Files' button
 
-In order to upload a file to a site, the 'choose files' input control is used. To a user, this will open a file browser on whatever platform they're on. Selenium cannot interact with this native control.
+In order to upload a file to a site, the 'choose files' input control is used.
+To a user, this will open a file browser on whatever platform they're on.
+Selenium cannot interact with this native control.
 
-In order to get around this, we can SendKeys(/path/to/file) directly on the input control - e.g. `chooseFilesInputButton.sendKeys("/path/to/file");`, which bypasses the file browser that selenium cannot handle.
+In order to get around this, we can SendKeys(/path/to/file) directly on the
+input control - e.g. `chooseFilesInputButton.sendKeys("/path/to/file");`,
+which bypasses the file browser that selenium cannot handle.
 
-The example below demonstrates how to perform this on the [HeroKu File Upload](http://the-internet.herokuapp.com/upload) page.
-The full example page object can be seen [here](https://github.com/Frameworkium/frameworkium-examples/blob/master/src/test/java/com/heroku/theinternet/pages/web/FileUploadPage.java) and the test that uses this [here](https://github.com/Frameworkium/frameworkium-examples/blob/master/src/test/java/com/heroku/theinternet/tests/web/TheInternetExampleTests.java#L140)
+The example below demonstrates how to perform this on the 
+[Heroku File Upload](http://the-internet.herokuapp.com/upload) page.
+The full example page object can be seen 
+[here](https://github.com/Frameworkium/frameworkium-examples/blob/master/src/test/java/com/heroku/theinternet/pages/web/FileUploadPage.java) and the test that uses this [here](https://github.com/Frameworkium/frameworkium-examples/blob/master/src/test/java/com/heroku/theinternet/tests/web/TheInternetExampleTests.java#L140)
 
 ```java
 @Visible
@@ -55,7 +61,7 @@ public FileUploadSuccessPage uploadFile(File filename) {
 }
 ```
 
-### Why not use AutoIt, Sikuli, or something that interacts with the file browser dialog instead?
+### Why not use AutoIt, Sikuli etc.
 
 Running locally, on your machine, with your config etc., a number of solutions may work perfectly well.
 However, the main problems come when you want to ramp things up - what about:
@@ -65,5 +71,6 @@ However, the main problems come when you want to ramp things up - what about:
 - on a grid - more dependencies required (e.g. AutoIt must be present on all your grid nodes)
 - reliability
 
-We want to try and keep our test pack as scalable and multi-platform as possible - although we're bypassing the OS's file browser by sending keys directly to the input control here.
+We want to try and keep our test pack as scalable and multi-platform as possible - 
+although we're bypassing the OS's file browser by sending keys directly to the input control here.
 It's important to remember our main focus is testing _our application_ - not the browser's file picker functionality.

@@ -12,7 +12,10 @@ order: 5
 
 Google Truth - `assertThat`
 
-Many assert libraries are available, but we recommend using Google's [Truth](https://google.github.io/truth/) library - it's nice and flexible, produces far more useful assertion errors, and is part of Frameworkium - just `import static com.google.common.truth.Truth.assertThat;` at the top of your test class.
+Many assert libraries are available, but we recommend using Google's 
+[Truth](https://google.github.io/truth/) library - it's nice and flexible, 
+produces far more useful assertion errors, and is part of Frameworkium - 
+just `import static com.google.common.truth.Truth.assertThat;` at the top of your test class.
 
 ## Examples
 

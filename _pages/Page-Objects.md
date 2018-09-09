@@ -97,4 +97,4 @@ public class LoginPage extends BasePage<LoginPage> {
 }
 ```
 
-[find-by-docs]: https://selenium.googlecode.com/git/docs/api/java/org/openqa/selenium/support/FindBy.html
+[find-by-docs]: https://seleniumhq.github.io/selenium/docs/api/java/org/openqa/selenium/support/FindBy.html

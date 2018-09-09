@@ -8,8 +8,9 @@ order: 7
 
 ### Problem
 
-A team has multiple environments for different purpose within the same project (e.g. QA, DevInt, Staging),
-we often need to parameterise multiple variables (e.g. urls, usernames, passwords).
+A team has multiple environments for different purpose within the same project 
+(e.g. QA, DevInt, Staging), we often need to parametrise multiple variables 
+(e.g. urls, usernames, passwords).
 
 ### Solution
 
