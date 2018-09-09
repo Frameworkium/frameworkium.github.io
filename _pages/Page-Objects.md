@@ -10,19 +10,19 @@ order: 4
 
 ### BasePage
 
-Page objects must extend `com.frameworkium.pages.internal.BasePage<T>`.
+Page objects must extend `com.frameworkium.core.ui.pages.BasePage<T>`.
 
 Where `T` is the type of the page you are creating e.g. `LoginPage`.
-This enables most Frameworkium features to work.
 
-### Elements (top)
+### Elements (Fields)
 
-Elements should be `private`, they should only be used by this class.
+Elements should be `private` and should only be used by this class.
 
 #### Annotations
 
 - `@Name` allows additional reporting and debugging information to be used later.
-- `@Visible` will tell Frameworkium to wait for the element to be displayed before returning the page.
+- `@Visible` Frameworkium will wait for the element to be displayed before returning the page.
+- `@InVisible` Frameworkium will wait for the element to NOT be displayed before returning the page.
 - `@FindBy` is a [Selenium annotation][find-by-docs].
 
 ### Actions (bottom)
@@ -30,21 +30,23 @@ Elements should be `private`, they should only be used by this class.
 All `public` methods on the page (the page's interface) should return either:
 
 - a Page Object,
-- built-in Java data types e.g. `String` or 
-- custom data types and 
-- **nothing** Frameworkium or Selenium specific e.g. `WebElement`
+- built-in Java data types e.g. `String` or
+- custom data types or
+- nothing e.g. `void`
+
+**Nothing** Frameworkium or Selenium specific e.g. `WebElement` should be returned.
 
 #### Navigation
 
 If an action on a page results in moving to a new page, then you can instantiate a new
 Page Object in one of two ways:
 
-- `return new NextPagePageObject().get();` or
-- `return PageFactory.newInstance(NextPagePageObject.class);`
+- `return new NextPagePage().get();` or
+- `return PageFactory.newInstance(NextPagePage.class);`
 
-A common mistake is omitting the `.get()` which results in a null pointer exception when
-trying to use the returned page object, this is because none of the fields (WebElements) would
-have been initialised.
+A common mistake is omitting the `.get()` in the first option which will result
+in a null pointer exception when trying to use the page object.
+This is because none of the fields (`WebElement`s) will be initialised.
 
 See the `validLogin()` method below.
 
