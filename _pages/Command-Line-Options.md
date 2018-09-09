@@ -9,7 +9,7 @@ Tests can be executed by running `mvn clean verify`.
 This can be followed by any properties, in the form `-DpropertyName=value`,
 you wish to specify.
 
-**See also** the "Using Config yaml files..." entry for using config files
+**See also** the []"Using Config files..."](Config_Files.md) entry for using config files
 to provide a subset of these params instead
 
 ## General
