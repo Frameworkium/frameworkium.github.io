@@ -6,39 +6,47 @@ section: 4 - Page Object Guidance
 order: 3
 ---
 
-**Only use waits in your Page Object - _never_ in your tests**
+Only use waits in your **Page Object** - _never_ in your tests
 
-You should not need to do many explicit waits - the `@Visible` tags etc. should handle the majority of cases.
+You should not need to do many explicit waits - the `@Visible` and `@Invisible`
+tags etc., which work on Page Object load, should handle the majority of cases.
 
 However - there are times when you'll need to wait. For example:
 
- - we want to click a button
+ - we want to click a button, but
  - the button is initially hidden; but made visible by linking the 'more' arrow
 
-So we want to click the 'more' arrow, then wait for the button to be visible before clicking on it.
-We use `wait.until` and `ExpectedConditions`, as in the following example:
+First we click the 'more' arrow, then wait for the button to be visible.
+We can use `wait.until` and `ExpectedConditions`, as in the following example:
 
 ```java
-@Visible
-@Name("More Arrow")
-@FindBy(css = "div#more-arrow")
-private WebElement moreArrow;
-
-@Name("Initially hidden button")
-@FindBy(css = "div#button")
-private WebElement initiallyHiddenButton;
-
-public Page clickInitiallyHiddenButton() {
-  moreArrow.click();
-  wait.until(ExpectedConditions.visibilityOf(initiallyHiddenButton));
-  initiallyHiddenButton.click();
-  return this;
+public class MyPage extends BasePage<MyPage> {
+    
+    @Visible
+    @FindBy(id = "more-arrow")
+    private WebElement moreArrow;
+    
+    // Initially hidden button
+    @FindBy(css = "div#button")
+    private WebElement myButton;
+    
+    public Page clickInitiallyHiddenButton() {
+      moreArrow.click();
+      wait.until(ExpectedConditions.visibilityOf(myButton));
+      myButton.click();
+      return this;
+    }
 }
 ```
 
-`ExpectedConditions` has lots of methods to help your waits - e.g.
-`elementToBeSelected()`, `titleContains()`, `textToBePresentInElement()`, `textToBePresentInElementValue()`, etc. - see [here](https://seleniumhq.github.io/selenium/docs/api/java/org/openqa/selenium/support/ui/ExpectedConditions.html) for the full list.
+[ExpectedConditions][EC] has lots of methods to help your waits - e.g.
+`elementToBeSelected(...)`, `titleContains(...)`, `textToBePresentInElement(...)`, 
+`textToBePresentInElementValue(...)`, etc.
 
-We have introduced our own extension to `ExpectedConditions` called `ExtraExpectedConditions`.
+Frameworkium has it's own extension to `ExpectedConditions`,
+called [`ExtraExpectedConditions`][EEC].
 
-NB - Frameworkium has implicit waits due to our use of HtmlElements.
+NB - Frameworkium (pre v3.0) has implicit waits due to our use of HtmlElements.
+
+[EC]: https://seleniumhq.github.io/selenium/docs/api/java/org/openqa/selenium/support/ui/ExpectedConditions.html
+[EEC]: https://github.com/Frameworkium/frameworkium-core/tree/master/src/main/java/com/frameworkium/core/ui/ExtraExpectedConditions.java
