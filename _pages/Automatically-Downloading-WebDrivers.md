@@ -7,6 +7,7 @@ order: 16
 ---
 
 Since: `2.4.4`
+Removed: `3.0.0`
 
 Frameworkium supports the [driver-binary-downloader][plugin] Maven plugin,
 which allows the automatic download of webdriver binaries from the Internet i.e.:
