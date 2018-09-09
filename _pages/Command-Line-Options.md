@@ -28,12 +28,11 @@ Property | Description | Values | Default
 
 Property | Description | Values | Default
 -------- | ----------- | ------ | -------
-`browser`|  The browser on which you wish to run the tests. |`firefox`, `chrome`, `safari`, `ie`, `opera`, `phantomjs`,`legacyfirefox`,`electron`,`custom` | `firefox`
+`browser`|  The browser on which you wish to run the tests. |`firefox`, `chrome`, `safari`, `ie`, `opera`, `legacyfirefox`,`electron`,`custom` | `firefox`
 `maximise`| Maximise browser on opening (if possible). | `true` or `false` | `false`
 `resolution`| Set browser dimensions to specific setting (if possible). | e.g. `1024x543` | none
-`firefoxProfile`| Legacy. See `customBrowserImpl` below for preferred method. Which will also be changing soon, once upgrade to Selenium to 3.7.1 is complete. | e.g. `path/to/CustomFF.profile` | none
-`chromeUserDataDir`| Legacy. See `customBrowserImpl` below for preferred method. | e.g. `path/to/chrome_user_data_dir` | none
-`customBrowserImpl`| Used alongside the `-Dbrowser=custom` param. Allows users to specify classname of their own browser implementation, for example for specifying a custom set of `Capabilities`. | e.g. `ChromeIncognitoBrowserImpl` | none
+`chromeUserDataDir`| Removed in v3.0.0. See `customBrowserImpl` below for preferred method. | e.g. `path/to/chrome_user_data_dir` | none
+`customBrowserImpl`| Allows users to specify classname (fully qualified name in v3.0.0) of their own browser implementation, for example for specifying a custom set of `Capabilities`. | e.g. `ChromeIncognitoBrowserImpl` or since v3.0.0 `my.package.ChromeIncognitoBrowserImpl` | none
 `headless`| Allows users to run Chrome or Firefox in a headless environment | `true` or `false` | `false`
 
 ## Remote Grids. Devices and Platforms
@@ -67,10 +66,10 @@ Property | Description | Values
 `jiraURL`| The base URL of the JIRA instance you want to use | e.g. `http://jira:8080`
 `jiraUsername`| The JIRA user you want to use | e.g. `JBloggs`
 `jiraPassword`| The JIRA user's password | e.g. `password`
-`jqlQuery`| the JQL query to use to look up the JIRA tests to run (the results of the query will be looked up against the `@Issue` annotations on tests | e.g. `(priority=1 and component=Admin) or issueKey=JIRA-123`
-`jiraResultFieldName`| The Jira field name to attempt to log results to for the specified `@Issue`. The values to change the field to are specified in the Jira config file. Useful if you're using a Jira field to mark the test result | e.g. `Test Result`
+`jqlQuery`| the JQL query to look up the JIRA tests to run (the results of the query will be looked up against the `@Issue` annotations on tests). | e.g. `(priority=1 and component=Admin) or issueKey=JIRA-123`
+`jiraResultFieldName`| The Jira field name to attempt to log results to for the specified `@Issue`. The values to change the field to are specified in the Jira config file. Useful if you're using a Jira field to mark the test result. | e.g. `Test Result`
 `jiraResultTransition`| If specified, will attempt to transition the `@Issue` specified through the transitions specified in the Jira config. Useful if using a customised Jira workflow for managing test results. | any value
-`resultVersion`| The 'Version' to mark the test execution against in Zephyr for JIRA (requires ZAPI) | e.g. `App v1.1.2`
+`resultVersion`| The 'Version' to mark the test execution against in Zephyr for JIRA (requires ZAPI). | e.g. `App v1.1.2`
 `zapiCycleRegEx`| If the Zephyr test cycle name contains this string test results will be logged against the matching cycles. | e.g. `firefox` or `my-special-cycle`
 
 ## Spira Integration
@@ -91,9 +90,9 @@ No defaults.
 
 Property | Description | Values
 ---------|-------------|-------
-`captureURL`| The base URL of the Capture instance you want to automatically send screenshots and step information to. | e.g. `http://capture:5000`
-`sutName`| The name of the system under test (SUT) to be presented in the Capture server dashboard. | e.g. `New Service`
-`sutVersion`| The release version to appear on the Capture server dashboard. | e.g. `1.2.5`
+`captureURL`| The base URL of the Capture instance you want to automatically send screenshots and step information to. | e.g. `http://capture/`
+`sutName`| The name of the system under test (SUT) to be presented in the Capture dashboard. | e.g. `My App`
+`sutVersion`| The release version to appear on the Capture dashboard. | e.g. `1.2.5`
 
 ## Examples
 
@@ -118,10 +117,10 @@ mvn clean verify -Dbrowser=firefox -DbrowserVersion=58.0.1 -DgridURL=http://loca
 Running test methods which match the pattern`testM*`on Firefox with Selenium Grid and Capture:
 
 ```bash
-mvn clean verify -Dtest=TestClass#testM* -Dbrowser=firefox -DgridURL=http://grid:4444/wd/hub -DsutName="My Project" -DsutVersion="0.0.1" -DcaptureURL=http://capture:5000
+mvn clean verify -Dtest=TestClass#testM* -Dbrowser=firefox -DgridURL=http://grid:4444/wd/hub -DsutName="My Project" -DsutVersion="0.0.1" -DcaptureURL=http://capture/
 ```
 
-Running mobile web tests on Chrome, using their device emulation:
+Running mobile web tests on Chrome, using its device emulation:
 
 ```bash
 mvn clean verify -Dbrowser=chrome -Ddevice="Apple iPad 3 / 4"
