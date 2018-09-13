@@ -21,7 +21,7 @@ to update your project to use the latest simply find and update the lines in you
 <dependency>
   <groupId>com.github.frameworkium</groupId>
   <artifactId>frameworkium-core</artifactId>
-  <version>2.4.3</version>
+  <version>2.7.2</version>
 </dependency>
 ```
 
