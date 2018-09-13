@@ -41,17 +41,20 @@ All `public` methods on the page (the page's interface) should return either:
 If an action on a page results in moving to a new page, then you can instantiate a new
 Page Object in one of two ways:
 
-- `return new NextPagePage().get();` or
-- `return PageFactory.newInstance(NextPagePage.class);`
+- `return PageFactory.newInstance(NextPage.class);` or
+- `return new NextPagePage().get();`
 
-A common mistake is omitting the `.get()` in the first option which will result
+A common mistake is omitting the `.get()` in the second option which will result
 in a null pointer exception when trying to use the page object.
 This is because none of the fields (`WebElement`s) will be initialised.
 
 See the `validLogin()` method below.
 
-If performing an action on a page results in staying on the same page, then you can simply use
-`return this;` e.g. the `invalidLogin()` method below.
+If performing an action on a page results in staying on the same page,
+then you can simply use `return this;` e.g. the `invalidLogin()` method below.
+If you keep getting `StaleElementReferenceException`s after `return this`, try
+to return a new page object instead, i.e.
+`return PageFactory.newInstance(ThisPage.class);`.
 
 #### Annotations
 
