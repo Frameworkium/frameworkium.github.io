@@ -25,7 +25,7 @@ public class DynamicLoadingWebTest extends BaseTest {
 As you can see in the example tests there are no references to WebDriver thanks to Frameworkium.
 This results in more readable tests which only deal with the services offered by your application
 and abstracts away the details and mechanics of it.
-For further explanation see the [Page Objects] page.
+For further explanation see the [Page Objects](#_pages/Page-Objects.md) page.
 
 ```java
 @Issue("BBA-5")
@@ -38,7 +38,7 @@ public void validLogin() {
 }
 ```
 
-### Annotations
+## Annotations
 
 - `@Issue` is be used for JIRA & ZAPI reporting, JQL Query executions, and within the Allure report
 - `@Story` utilise Allure's Features and Stories hierarchy and make larger test suites easier to manage
